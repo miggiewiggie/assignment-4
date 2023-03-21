@@ -8,12 +8,20 @@ int extraMemoryAllocated;
 void merge(int pData[], int l, int m, int r)
 {
 	int size1 = m - l + 1;
+	extraMemoryAllocated += sizeof(int);
+
 	int size2 = r - m;
+	extraMemoryAllocated += sizeof(int);
 
 	int *leftArray = (int*)malloc(size1 * sizeof(int));
+	extraMemoryAllocated += sizeof(leftArray);
 	int *rightArray = (int*)malloc(size1 * sizeof(int));
+	extraMemoryAllocated += sizeof(rightArray);
+
 	int i;
+	extraMemoryAllocated += sizeof(int);
 	int j;
+	extraMemoryAllocated += sizeof(int);
 
 	for(i = 0; i < size1; i++)
 	{
@@ -27,6 +35,7 @@ void merge(int pData[], int l, int m, int r)
 	i = 0;
 	j=0;
 	int k = l;
+	extraMemoryAllocated += sizeof(int);
 
 	while(i < size1 && j < size2)
 	{
@@ -64,9 +73,13 @@ void merge(int pData[], int l, int m, int r)
 // extraMemoryAllocated counts bytes of extra memory allocated
 void mergeSort(int pData[], int l, int r)
 {
+	int m;
+	extraMemoryAllocated += sizeof(int);
+	
 	if(l < r)
 	{
-		int m = (l + r) / 2;
+		m = (l + r) / 2;
+		
 		mergeSort(pData, l, m);
 		mergeSort(pData, m + 1, r);
 		
@@ -79,8 +92,12 @@ void mergeSort(int pData[], int l, int r)
 void insertionSort(int* pData, int n)
 {
 	int item;
+	extraMemoryAllocated += sizeof(int);
 	int i;
+	extraMemoryAllocated += sizeof(int);
 	int j;
+	extraMemoryAllocated += sizeof(int);
+
 	for(i = 1; i < n; i++)
 	{
 		item  = pData[i];
@@ -99,13 +116,21 @@ void insertionSort(int* pData, int n)
 // extraMemoryAllocated counts bytes of extra memory allocated
 void bubbleSort(int* pData, int n)
 {
-	for(int i = 0; i < n - 1; i++)
+	
+	int i;
+	extraMemoryAllocated += sizeof(int);
+	int j;
+	extraMemoryAllocated += sizeof(int);
+	int temp;
+	extraMemoryAllocated += sizeof(int);
+
+	for(i = 0; i < n - 1; i++)
 	{
-		for(int j = 0; j < n - i - 1; j++)
+		for(j = 0; j < n - i - 1; j++)
 		{
 			if(pData[j] > pData[j + 1])
 			{
-				int temp = pData[j];
+				temp = pData[j];
 				pData[j] = pData[j+1];
 				pData[j+1] = temp;
 			}
@@ -118,11 +143,21 @@ void bubbleSort(int* pData, int n)
 void selectionSort(int* pData, int n)
 {
 	int min;
+	extraMemoryAllocated += sizeof(int);
 
-	for(int i = 0; i < n - 1; i++)
+	int i;
+	extraMemoryAllocated += sizeof(int);
+
+	int j;
+	extraMemoryAllocated += sizeof(int);
+
+	int temp;
+	extraMemoryAllocated += sizeof(int);
+
+	for(i = 0; i < n - 1; i++)
 	{
 		min = i;
-		for(int j = i + 1; j < n; j++)
+		for(j = i + 1; j < n; j++)
 		{
 			if(pData[j] < pData[min])
 			{
@@ -130,7 +165,7 @@ void selectionSort(int* pData, int n)
 			}
 		}
 
-		int temp = pData[i];
+		temp = pData[i];
 		pData[i] = pData[min];
 		pData[min] = temp;
 	}
